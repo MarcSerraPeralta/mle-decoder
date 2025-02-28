@@ -4,7 +4,9 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ![PyPI](https://img.shields.io/pypi/v/mle-decoder?label=pypi%20package)
 
-Most-likely error (MLE) decoder that uses gurobi to solve the mixed-interger (linear) programming problem
+Most-likely error (MLE) decoder that uses gurobi to solve the mixed-interger (linear) programming problem.
+
+The decoding hypergraph is specified using `stim.DetectorErrorModel`.
 
 
 ## MLE optimization description
