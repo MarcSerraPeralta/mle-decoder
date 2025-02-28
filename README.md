@@ -1,5 +1,9 @@
 # mle-decoder
 
+![example workflow](https://github.com/MarcSerraPeralta/mle-decoder/actions/workflows/ci_pipeline.yaml/badge.svg)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+![PyPI](https://img.shields.io/pypi/v/mle-decoder?label=pypi%20package)
+
 Most-likely error (MLE) decoder that uses gurobi to solve the mixed-interger (linear) programming problem
 
 
