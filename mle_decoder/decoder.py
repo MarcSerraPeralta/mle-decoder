@@ -88,7 +88,7 @@ class MLEDecoder:
             error_vars.append(model.getVarByName(f"errors[{k}]"))
         predicted_errors = np.array(model.getAttr("X", error_vars))
         correction = (self.logical_matrix @ predicted_errors) % 2
-        correction = np.astype(correction, bool)
+        correction = correction.astype(bool)
 
         return correction
 
