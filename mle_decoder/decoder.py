@@ -50,7 +50,7 @@ class MLEDecoder:
 
         # define model
         model = gp.Model("milp")
-        if self.verbose:
+        if not self.verbose:
             model.Params.OutputFlag = 0
             model.Params.LogToConsole = 0
 
