@@ -34,7 +34,7 @@ class MLEDecoder:
 
         return
 
-    def decode(self, defects: np.ndarray) -> np.ndarray:
+    def decode_to_faults_array(self, defects: np.ndarray) -> np.ndarray:
         if not isinstance(defects, np.ndarray):
             raise TypeError(
                 f"'defects' is not a np.ndarray, but {type(defects)} was given."
@@ -87,9 +87,13 @@ class MLEDecoder:
         for k in range(self.num_errors):
             error_vars.append(model.getVarByName(f"errors[{k}]"))
         predicted_errors = np.array(model.getAttr("X", error_vars))
+
+        return predicted_errors
+
+    def decode(self, defects: np.ndarray) -> np.ndarray:
+        predicted_errors = self.decode_to_faults_array(defects)
         correction = (self.logical_matrix @ predicted_errors) % 2
         correction = correction.astype(bool)
-
         return correction
 
     def decode_batch(self, defects: np.ndarray) -> np.ndarray:
