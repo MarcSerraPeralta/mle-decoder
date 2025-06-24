@@ -48,6 +48,10 @@ class MLEDecoder:
                 f"'defects' must be an array of type bool, but type {defects.dtype} was given."
             )
 
+        # if no detector is triggered, the output is always "no error"
+        if defects.sum() == 0:
+            return np.zeros(self.num_errors, dtype=bool)
+
         # define model
         model = gp.Model("milp")
         if not self.verbose:
@@ -69,9 +73,7 @@ class MLEDecoder:
             )
 
         # define cost function to maximize
-        obj_fn = 0
-        for k in range(self.dem.num_errors):
-            obj_fn += np.log(self.probs[k] / (1 - self.probs[k])) * errors[k]
+        obj_fn = (np.log(self.probs / (1 - self.probs))).T @ errors
         model.setObjective(obj_fn, GRB.MAXIMIZE)
 
         # update model to build the contraints and cost function
@@ -86,7 +88,7 @@ class MLEDecoder:
         error_vars = []
         for k in range(self.num_errors):
             error_vars.append(model.getVarByName(f"errors[{k}]"))
-        predicted_errors = np.array(model.getAttr("X", error_vars))
+        predicted_errors = np.array(model.getAttr("X", error_vars), dtype=bool)
 
         return predicted_errors
 
