@@ -36,4 +36,5 @@ dev = [
     "flake8", 
     "flake8-print", 
     "pytest-flake8",
+    "gprof2dot",
 ]
