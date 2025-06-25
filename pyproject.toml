@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+requires-python = ">=3.10"
+name = "mle_decoder"
+description = "Most-likely error (MLE) decoder that uses gurobi to solve the mixed-interger (linear) programming problem" 
+version = "0.2.0"
+authors = [
+    { name = "Marc Serra Peralta", email = "marcserraperalta@gmail.com" }
+]
+maintainers = [
+    { name = "Marc Serra Peralta", email = "marcserraperalta@gmail.com" }
+]
+license = {file = "LICENSE"}
+readme = "README.md"
+dependencies = [
+    "numpy",
+    "stim",
+    "gurobipy",
+    "scipy", # dependency of gurobipy, but not installed with it
+]
+keywords = ["MLE", "decoder", "quantum error correction", "qec"]
+
+[tool.setuptools.packages.find]
+include = ["mle_decoder", "mle_decoder.*"]  # package names should match these glob patterns (["*"] by default)
+namespaces = false  # to disable scanning PEP 420 namespaces (true by default)
+
+[project.optional-dependencies]
+dev = [
+    "pip-tools", 
+    "pytest", 
+    "black", 
+    "pytest-black", 
+    "flake8", 
+    "flake8-print", 
+    "pytest-flake8",
+    "gprof2dot",
+]
