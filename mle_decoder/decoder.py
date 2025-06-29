@@ -93,7 +93,7 @@ class MLEDecoder:
         return predicted_errors
 
     def decode(self, defects: np.ndarray) -> np.ndarray:
-        predicted_errors = self.decode_to_faults_array(defects)
+        predicted_errors = self.decode_to_faults_array(defects).astype(int)
         correction = (self.logical_matrix @ predicted_errors) % 2
         correction = correction.astype(bool)
         return correction
